@@ -21,11 +21,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 3: Build and push Docker image
+      # Step 3: Build and Push Docker Image
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./cloudyy       # Path to your application code
-          file: ./cloudyy/Dockerfile # Path to your Dockerfile
+          context: ./cloudyy            # Path to your application code
+          file: ./cloudyy/Dockerfile    # Path to your Dockerfile
           push: true
-          tags: feature1
+          tags: ${{ secrets.DOCKER_USERNAME }}/cloudyy:feature1
