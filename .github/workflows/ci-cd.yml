@@ -3,14 +3,14 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - feature1 # Trigger the workflow on changes to the feature1 branch
+      - feature1  # Trigger the workflow when changes are pushed to feature1 branch
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -23,9 +23,9 @@ jobs:
 
       # Step 3: Build and Push Docker Image
       - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./cloudyy           # Path to your application code
-          file: ./cloudyy/Dockerfile   # Path to your Dockerfile
-          push: true
-          tags: feature1
+        run: |
+          # Build the Docker image
+          docker build -f ./cloudyy/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/cloudyy:feature1 ./cloudyy
+          
+          # Push the Docker image to DockerHub
+          docker push ${{ secrets.DOCKER_USERNAME }}/cloudyy:feature1
