@@ -3,14 +3,14 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - feature1 # Trigger the workflow on the feature1 branch
+      - feature1 # Trigger the workflow on changes to the feature1 branch
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -18,14 +18,14 @@ jobs:
       - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
-          username: naveenprasaath29@gmail.com
-          password: QAZwsc1729/*-+
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 3: Build and Push Docker Image
+      # Step 3: Build and push Docker image
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./cloudyy
-          file: ./cloudyy/Dockerfile
+          context: ./cloudyy       # Path to your application code
+          file: ./cloudyy/Dockerfile # Path to your Dockerfile
           push: true
-          tags: f1
+          tags: feature1
