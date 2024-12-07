@@ -28,4 +28,4 @@ jobs:
           context: ./cloudyy            # Path to your application code
           file: ./cloudyy/Dockerfile    # Path to your Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/cloudyy:feature1
+          tags: feature1
