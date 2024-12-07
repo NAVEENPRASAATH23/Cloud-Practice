@@ -25,7 +25,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./clouddy
-          file: ./clouddy/Dockerfile
+          context: ./cloudyy
+          file: ./cloudyy/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/clouddy:f1
+          tags: ${{ secrets.DOCKER_USERNAME }}/cloudyy:f1
