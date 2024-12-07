@@ -28,4 +28,4 @@ jobs:
           context: ./clouddy
           file: ./clouddy/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/clouddy:feature1
+          tags: ${{ secrets.DOCKER_USERNAME }}/clouddy:f1
