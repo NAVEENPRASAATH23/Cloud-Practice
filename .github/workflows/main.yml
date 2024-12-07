@@ -3,17 +3,17 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger on push to the feature1 branch
+      - feature1
   pull_request:
     branches:
-      - main  # Trigger on pull request to the feature1 branch
+      - feature1
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the code from GitHub repository
+    # Step 1: Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -21,20 +21,22 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'  # You can change this based on the version you're using
+        node-version: '18'
 
     # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
+      working-directory: ./client  # Add this if package.json is inside the 'client' folder
 
     # Step 4: Build the React app
-    - name: Build the React app
+    - name: Build React app
       run: npm run build
+      working-directory: ./client  # Add this if package.json is inside the 'client' folder
 
-    # Step 5: Build the Docker image
+    # Step 5: Build Docker image
     - name: Build Docker image
-      run: |
-        docker build -t my-react-app .
+      run: docker build -t my-react-app .
+      working-directory: ./client  # Add this if package.json is inside the 'client' folder
 
     # Step 6: Log in to Docker Hub (or your Docker registry)
     - name: Log in to Docker Hub
@@ -43,8 +45,8 @@ jobs:
         username: naveenprasaath29@gmail.com
         password: QAZwsc1729/*-+
 
-    # Step 7: Push the Docker image
+    # Step 7: Push Docker image
     - name: Push Docker image
       run: |
-        docker tag my-react-app ${{ secrets.DOCKER_USERNAME }}/my-react-app:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-react-app:latest
+        docker tag my-react-app naveenprasaath29@gmail.com/my-react-app:v1
+        docker push naveenprasaath29@gmail.com/my-react-app:v1
