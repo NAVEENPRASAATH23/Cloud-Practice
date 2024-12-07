@@ -25,7 +25,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: /cloudyy           # Path to your application code
+          context: ./cloudyy           # Path to your application code
           file: ./cloudyy/Dockerfile   # Path to your Dockerfile
           push: true
           tags: feature1
